@@ -1,0 +1,22 @@
+services:
+  gateway:
+    image: ghcr.io/openclaw/openclaw:latest
+    container_name: openclaw-gateway
+    restart: always
+    ports:
+      - "18789:18789"
+    volumes:
+      - /home/thanukon_kie/.openclaw:/home/node/.openclaw
+    environment:
+      - NODE_ENV=production
+      - GOOGLE_API_KEY=AIzaSyBLoZnFoViwmgmNv2-I-p8d0lhDhlN8Y-Y
+    healthcheck:
+      disable: true
+    networks:
+      - openclaw-net
+
+networks:
+  openclaw-net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1460
